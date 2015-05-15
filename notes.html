@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Glósunet</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery.dropotron.min.js"></script>
+		<script src="jQuery-TE_v.1.4.0/jquery-te-1.4.0.min.js"></script>
+		<link type="text/css" rel="stylesheet" href="jQuery-TE_v.1.4.0/jquery-te-1.4.0.css">
+		<link type="text/css" rel="stylesheet" href="css/styles.css">
+		<script src="./js/handlebars-v3.0.0.js"></script>
+		<script>
+		</script>
+	</head>
+	<body>
+		<div id="header" class="skel-panels-fixed">
+			<div id="logo">
+				<h1><a href="/">Glósunet</a></h1>
+			</div>
+			<nav id="nav">
+				<ul class="navbar">
+					<li id="homeName"></li>
+					<li><a href="/about"><h3>Um Glósunet</h3></a></li>
+					<li class="active"><a href="/notes"><h3>Ný glósa</h3></a></li>
+					<li><a href="/search"><h3>Finna glósur</h3></a></li>
+				</ul>
+			</nav>
+		</div>
+		
+		<!-- 	Take Notes	-->
+		<div id="wrapper">
+			<textarea id="jqte_test"></textarea>
+			<script>
+				$('#jqte_test').jqte();
+			</script>
+		</div>
+		<div id="saveButton">Vista glósu</div>
+		<div id="saveOptions">
+			Titill: <input type="text" name="title"><br>
+			Tags: <input type="text" name="tags"><br>
+			Lýsing: <textarea id="desc" placeholder="Lýsing á glósu.." maxlength="75"></textarea>
+			<button type="button" id="saveNoteButton">Save</button>
+			<button type="button" id="cancelSaving">Cancel</button>
+		</div>
+		<script id="some-template" type="text/x-handlebars-template">
+			<a href="/" id="username" data-toggle="dropdown"><h3>{{ name }}</h3></a>
+		</script>
+		<script src="./js/handles.js"></script>
+		<script>
+		$('document').ready(function() {
+			if(localStorage.noteVal){
+				var oldVal = localStorage.noteVal;
+			}
+			else{
+				var oldVal = "Glósan mín.."
+			}
+			console.log(oldVal);
+			$("#jqte_test").jqteVal(oldVal);
+			
+			$('#saveButton').click(function(){
+				$('#saveOptions').toggle();
+			});
+			$('#saveNoteButton').click(function(){
+				$.get('/username', function(data){
+					console.log('jqte_test value: ' + $('#jqte_test').val());
+					$.post( "/save", { title: $('input:text[name=title]').val(),desc: $("#desc").val(), author: data[0].name, authorID: data[0].id, content: $('#jqte_test').val() , tags: [$('input:text[name=tags]').val()] });
+				});
+				$('#saveOptions').toggle();
+				localStorage.removeItem('noteVal');
+				$("#jqte_test").jqteVal('');
+			});
+			$('#cancelSaving').click(function(){
+				$('#saveOptions').toggle();
+			});
+			
+			$("#wrapper").on('change keyup paste', function() {
+				var currentVal = $('#jqte_test').val();
+				if(currentVal == oldVal) {
+					return;
+				}
+				else{
+					oldVal = currentVal;
+					console.log('change keyup or paste');
+					localStorage.setItem("noteVal", $('#jqte_test').val());
+				}
+			});
+		});
+		</script>
+	</body>
+</html>

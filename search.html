@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Glósunet</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<script src="../js/jquery.min.js"></script>
+		<script src="../js/jquery.dropotron.min.js"></script>
+		<script src="../jQuery-TE_v.1.4.0/jquery-te-1.4.0.min.js"></script>
+		<link type="text/css" rel="stylesheet" href="../jQuery-TE_v.1.4.0/jquery-te-1.4.0.css">
+		<link type="text/css" rel="stylesheet" href="../css/styles.css">
+		<script src="../js/handlebars-v3.0.0.js"></script>
+	</head>
+	<body>
+		<div id="header" class="skel-panels-fixed">
+			<div id="logo">
+				<h1><a href="/">Glósunet</a></h1>
+			</div>
+			<nav id="nav">
+				<ul class="navbar">
+					<li id="homeName"></li>
+					<li><a href="/about"><h3>Um Glósunet</h3></a></li>
+					<li><a href="/notes"><h3>Ný glósa</h3></a></li>
+					<li class="active"><a href="/search"><h3>Finna glósur</h3></a></li>
+				</ul>
+			</nav>
+			<div id="searchWrap"><input type="search" id="search" placeholder="Leita..."></input><button id="pressSearch">Leita</button></div>
+		</div>
+			<div class="noteListWrapper">
+				<ul class="noteList">
+					<script class="noteTemplate" type="text/x-handlebars-template">
+						<a href="/note/{{_id}}">
+						<li class="oneNote">
+							<img src="../css/noteLogo.png">
+							<h3 class="noteTitle">{{title}}</h3>
+							<span>{{date}}</span>
+							<p class="desc">{{desc}}</p>
+							<p class="auth"><a href="/user/{{authorID}}">{{author}}</a></p><span>Flokkar: {{tags}}</span>
+						</li>
+						</a>
+					</script>
+				</ul>
+			</div>
+		<script id="some-template" type="text/x-handlebars-template">
+			<a href="/user/{{id}}" id="username" data-toggle="dropdown"><h3>{{ name }}</h3></a>
+		</script>
+		<script src="../js/handles.js"></script>
+		<script src="../js/loadNotes.js"></script>
+	</body>
+</html>

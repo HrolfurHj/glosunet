@@ -1,0 +1,27 @@
+{
+  "name"                 : "Glosunet",
+  "version"              : "0.0.1",
+  "description"          : "Take and share notes",
+  "main"                 : "server_test.js",
+  "author"               : "Hrólfur Hjörleifsson",
+  "private"				 : "true",
+  "dependencies"         : {
+		"express"            : "4.8.x",
+		"request"			 : "latest",
+		"http"               : "latest",
+		"cheerio"			 : "latest",
+		"iconv-lite"		 : "latest",
+		"jquery"             : "latest",
+		"mongoose-q"         : "latest",
+		"express-session"	 : "latest",
+		"body-parser"		 : "latest",
+		"fb"				 : "latest",
+		"express3-handlebars": "latest",
+		"passport"			 : "latest",
+		"passport-facebook"	 : "latest",
+		"path"				 : "latest"
+  },
+  "engines" : {
+    "node": "0.10.x"
+  }
+}
