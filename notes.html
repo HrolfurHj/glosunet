@@ -20,27 +20,31 @@
 			<nav id="nav">
 				<ul class="navbar">
 					<li id="homeName"></li>
-					<li><a href="/about"><h3>Um Glósunet</h3></a></li>
 					<li class="active"><a href="/notes"><h3>Ný glósa</h3></a></li>
 					<li><a href="/search"><h3>Finna glósur</h3></a></li>
+					<li><a href="/about"><h3>Um Glósunet</h3></a></li>
 				</ul>
 			</nav>
 		</div>
 		
 		<!-- 	Take Notes	-->
-		<div id="wrapper">
-			<textarea id="jqte_test"></textarea>
-			<script>
-				$('#jqte_test').jqte();
-			</script>
-		</div>
-		<div id="saveButton">Vista glósu</div>
-		<div id="saveOptions">
-			Titill: <input type="text" name="title"><br>
-			Tags: <input type="text" name="tags"><br>
-			Lýsing: <textarea id="desc" placeholder="Lýsing á glósu.." maxlength="75"></textarea>
-			<button type="button" id="saveNoteButton">Save</button>
-			<button type="button" id="cancelSaving">Cancel</button>
+		<div id="container">
+			<div id="wrapper">
+				<textarea id="jqte_test"></textarea>
+				<script>
+					$('#jqte_test').jqte();
+				</script>
+			</div>
+			<div id="save_wrap">
+				<div id="saveButton"><h3>Vista</h3></div>
+				<div id="saveOptions">
+					<b>Titill</b><input type="text" name="title"><br>
+					<b>Flokkar</b><input type="text" name="tags"><br>
+					<b>Lýsing</b><br><textarea id="desc" placeholder="Lýsing á glósu.." maxlength="75"></textarea>
+					<button type="button" id="saveNoteButton">Save</button>
+					<button type="button" id="cancelSaving">Cancel</button>
+				</div>
+			</div>
 		</div>
 		<script id="some-template" type="text/x-handlebars-template">
 			<a href="/" id="username" data-toggle="dropdown"><h3>{{ name }}</h3></a>
@@ -63,11 +67,12 @@
 			$('#saveNoteButton').click(function(){
 				$.get('/username', function(data){
 					console.log('jqte_test value: ' + $('#jqte_test').val());
-					$.post( "/save", { title: $('input:text[name=title]').val(),desc: $("#desc").val(), author: data[0].name, authorID: data[0].id, content: $('#jqte_test').val() , tags: [$('input:text[name=tags]').val()] });
+					$.post( "/save", { title: $('input:text[name=title]').val(),desc: $("#desc").val(), author: data[0].name, authorID: data[0].id, content: $('#jqte_test').val() , tags: [$('input:text[name=tags]').val()] }, function(data){
+						localStorage.removeItem('noteVal');
+						$("#jqte_test").jqteVal('');
+					});
 				});
 				$('#saveOptions').toggle();
-				localStorage.removeItem('noteVal');
-				$("#jqte_test").jqteVal('');
 			});
 			$('#cancelSaving').click(function(){
 				$('#saveOptions').toggle();

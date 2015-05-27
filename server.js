@@ -1,3 +1,5 @@
+// Setja upp pakka til notkunar
+
 var express = require('express');
 var fs = require('fs');
 var path = require('path');
@@ -15,14 +17,20 @@ var session = require('express-session');
 var FB = require('fb');
 var app     = express();
 
+console.log(process.platform);
+console.log(process.arch);
 
-  app.use(express.static(__dirname + '/public')); 
-  app.use( bodyParser.json() );       // to support JSON-encoded bodies
-  app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
-  extended: true
-  }));
+// Express setup fyrir bodyparser og static files
+
+app.use(express.static(__dirname + '/public')); 
+app.use( bodyParser.json() );       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+	extended: true
+}));
   
-  
+
+// Passport setup
+
 passport.serializeUser(function(user, done) {
   done(null, user.id);
 });
@@ -33,20 +41,23 @@ passport.deserializeUser(function(id, done) {
   });
 });
   
+  
+//Express Session setup
+  
 app.use(session({
     secret: secret,
     resave: true,
     saveUninitialized: true
 }));
-  app.use(passport.initialize());
-  app.use(passport.session());
-  //app.use(cookieParser());
- // app.use(session({secret : 'secret stuff'}));
 
+app.use(passport.initialize());
+app.use(passport.session());
+
+//Tengjast facebook
 
 passport.use(new FacebookStrategy({
-    clientID: 1563659797219527,
-    clientSecret: clientSecret,
+    clientID: ID,
+    clientSecret: SECRET,
     callbackURL: "http://glosunet-46580.onmodulus.net/auth/facebook/callback"
   },
   function(accessToken, refreshToken, profile, done) {
@@ -58,12 +69,14 @@ passport.use(new FacebookStrategy({
 				}
 				//No user was found... so create a new user with values from Facebook (all the profile. stuff)
 				if (!user) {
+					// Búa til og vista notanda
 					console.log('no user was found');
 					console.log('profile: ');
 					console.log(profile._json.name);
 					user = new User({
 						name: profile.displayName,
 						id: profile.id,
+						following: [],
 					});
 					user.save(function(err) {
 						if (err) console.log(err);
@@ -79,18 +92,24 @@ passport.use(new FacebookStrategy({
 	}
 ));
 
+// Senda authentication
 
 app.get('/auth/facebook', passport.authenticate('facebook'));
+
+// Callback fyrir authentication á facebook.
 
 app.get('/auth/facebook/callback', passport.authenticate('facebook', { 	successRedirect: '/',
 																		failureRedirect: '/login' }
 ));
+
+// Login handler
 
 app.get('/login', function(req, res){
 	res.sendFile(path.join(__dirname, 'login.html'));
 });
 
 
+// Setup fyrir handlebars, ekki notað í augnablikinu
 
 var hbs = exphbs.create({
     defaultLayout: 'main',
@@ -98,7 +117,8 @@ var hbs = exphbs.create({
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
-/////////////// Basic get functions!
+
+// Grunn aðgerðir fyrir helstu linka
 
 app.get('/', ensureAuthenticated, function(req, res){
 	res.sendFile(path.join(__dirname, 'index.html'));
@@ -124,8 +144,6 @@ app.get('/search', ensureAuthenticated, function(req, res){
 });
 
 
-/////////////////// Basic post functions
-
 app.get('/user/:id', ensureAuthenticated, function(req, res){
 	Note.find({authorID: req.params.id}, function(err, user){
 		if(err) return err;
@@ -137,10 +155,22 @@ app.get('/username', ensureAuthenticated, function(req, res){
 	res.send(req.user);
 });
 
+
+
+
+// Grunn Post aðgerðir
+
 app.post("/userNotes", function(req, res) {
 	Note.find({authorID: req.body.id} ,function(err, note){
 			if(err) return err;
 			res.send(JSON.stringify(note));
+	});
+});
+
+app.post("/userFollowed", function(req, res) {
+	Note.find({_id: {$in: req.body.id}} ,function(err, note){
+		if(err) return err;
+		res.send(JSON.stringify(note));
 	});
 });
 
@@ -169,6 +199,31 @@ app.post("/loadNote", function (req, res) {
 	});
 });
 
+app.post("/followNote", function (req, res) {
+	User.findOne({id: req.user[0].id}, function(err, user){
+		if (err) { return next(err); }
+		user.following.push(req.body.id);
+		user.save(function(err) {
+			if (err) { return next(err); }
+			console.log(user.following);
+		});
+	});
+	res.send('saved')
+});
+
+app.post("/unFollowNote", function (req, res) {
+	User.findOne({id: req.user[0].id}, function(err, user){
+		if (err) { return next(err); }
+		var index = user.following.indexOf(req.body.id);
+		user.following.splice(index, 1);
+		user.save(function(err) {
+			if (err) { return next(err); }
+			console.log(user.following);
+		});
+	});
+	res.send('unfollowed');
+});
+
 app.post('/save', function(req, res){
 	var d = new Date();
 	console.log('d: ' + d);
@@ -186,9 +241,10 @@ app.post('/save', function(req, res){
                 note.save(function(err) {
                     if (err) console.log(err);
                 });
+	res.send('saved');
 });
 
-////////////// Static files handler
+// Handler fyrir static files
 
 app.get(/^(.+)$/, function (req, res) {
     //console.log('static file request : ' + req.params);
@@ -196,15 +252,14 @@ app.get(/^(.+)$/, function (req, res) {
 });
 
 
-
-
-//////////////// Listen on port 8000
+// Port setup
 
 app.listen(8080);
-console.log('port 8000');
+console.log('port 8080');
 exports = module.exports = app;
 
 
+// Fall sem stjórnar aðgangi að síðunni
 
 function ensureAuthenticated(req, res, next) {
   if (req.user) { return next(); }

@@ -20,16 +20,17 @@
 			<nav id="nav">
 				<ul class="navbar">
 					<li class="active" id="homeName"></li>
-					<li><a href="/about"><h3>Um Glósunet</h3></a></li>
 					<li><a href="/notes"><h3>Ný glósa</h3></a></li>
 					<li><a href="/search"><h3>Finna glósur</h3></a></li>
+					<li><a href="/about"><h3>Um Glósunet</h3></a></li>
 				</ul>
 			</nav>
 		</div>
+		<div id="container">
 		<div class="splitDivLeft">
 				<div class="myNotes">
 					<h2>Mínar glósur</h2>
-					<ul class="noteList">
+					<ul class="myNoteList">
 						<script class="noteTemplate" type="text/x-handlebars-template">
 							<a href="/note/{{_id}}">
 							<li class="oneNote">
@@ -48,19 +49,19 @@
 				<div class="followedNotes">
 					<h2>Vistaðar glósur</h2>
 					<ul class="savedNoteList">
-						<script class="noteTemplate" type="text/x-handlebars-template">
-							<a href="/note/{{_id}}">
-							<li class="oneNote">
+						<script class="FNoteTemplate" type="text/x-handlebars-template">
+							<li class="oneNote" id="{{_id}}">
 								<img src="../css/noteLogo.png">
-								<h3 class="noteTitle">{{title}}</h3>
+								<h4 class="throw" id="{{_id}}">Henda</h4>
+								<a href="/note/{{_id}}"><h3 class="noteTitle">{{title}}</h3></a>
 								<span>{{date}}</span>
 								<p class="desc">{{desc}}</p>
 								<p class="auth">{{author}}</p><span>Flokkar: {{tags}}</span>
 							</li>
-							</a>
 						</script>
 					</ul>
 				</div>
+		</div>
 		</div>
 		<script>
 		</script>

@@ -1,7 +1,7 @@
 html, body{
 	margin: 0;
 	padding: 0;
-	background: #eee;
+	background: #424242;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -18,12 +18,19 @@ a {
 }
 
 #header {
-	position: fixed;
-	top: 0px;
-	width: 100%;
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	width: 75%;
+	min-width: 1024px;
+	margin: 0 auto;
+	margin-top: 10px;
 	height: 70px;
-	background: #1992f5;
+	background: #1a1a1a;
 	color: #fff;
+	border-radius: 20px;
+	border: 2px solid white;
 	z-index: 100;
 }
 
@@ -42,7 +49,7 @@ a {
 	top: 0px;
 	width: 100%;
 	height: 25vh;
-	background: #1992f5;
+	background: #1a1a1a;
 	color: #ffffff;
 	z-index: 100;
 }
@@ -51,12 +58,12 @@ a {
 #logo {
 	position: relative;
 	float: left;
-	width: 300px;
+	width: 140px;
 	padding: 20px;
 }
 
 #login_logo{
-	width: 500px;
+	width: 27vw;
 	font-family: "Courier New", Courier, monospace;
 	font-size: 6em;
 	font-weight: 700;
@@ -67,7 +74,7 @@ a {
 #login{
 	width:60vh;
 	margin: 30vh auto;
-	border: 10px solid #1992f5;
+	border: 2px solid white;
 	border-radius: 25px;
 	text-align: center;
 }
@@ -85,14 +92,15 @@ a {
 	margin: 4px auto;
 	border: 2px solid #000000;
 	border-radius: 10px;
-	background-color: #1992f5;
+	background-color: #1a1a1a;
+	padding: 0.5em;
 	color: #ffffff;
 	cursor: pointer;
 }
 
 #nav {
 	text-align: center;
-	width: 700px;
+	width: 820px;
 	margin: auto;
 }
 
@@ -102,7 +110,6 @@ a {
 	padding-top: 10px;
 	border-radius: 5px;
 	display: inline-block;
-	margin-right: 10px;
 	-moz-transition: background-color 0.35s ease-in-out;
 	-webkit-transition: background-color 0.35s ease-in-out;
 	-o-transition: background-color 0.35s ease-in-out;
@@ -120,6 +127,7 @@ a {
 	color: #ddd;
 	color: rgba(255, 255, 255, 0.75);
 	text-decoration: none;
+	font-size: 0.9em;
 }
 
 #nav ul li a:hover {
@@ -134,16 +142,14 @@ a {
 }
 
 #wrapper{
-	height: 60%;
-	max-height: 60%;
-	width: 60%;
-	margin: 0px auto;
-	margin-top: 90px;
+	width: 80%;
+	padding: 1%;
+	display: inline-block;
 }
 
 #jqte_test{
-	height: 2000px;
-	width: 100%;
+	margin: 0;
+	padding: 0;
 }
 
 
@@ -152,107 +158,135 @@ a {
 }
 
 #saveButton{
-	position: absolute;
-	top: 90px;
-	right: 80px;
-	width: 10%;
-  border-radius: 3px;
-  height: 45px;
-  padding-top: 5px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  cursor: pointer;
-  background-color: #1992f5;
-  color: #ffffff;
-   font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
-   text-align: center;
-   font-size: 30px;
+	width: 100%;
+	text-align: center;
+	font-size: 0.9em;
+	border: 1px solid white;
+	border-radius: 3px;
+	height: 30px;
+	text-align: center;
+	margin-top: 15%;
+	cursor: pointer;
+}
+
+#saveButton h3{
+	color: #ffffff;
+	margin-top: 3%;
+}
+
+#save_wrap{
+	float: right;
+	display: inline-block;
+	width: 15%;
+	padding: 1%;
 }
 
 #saveButton:hover{
-	background-color: #199fff;
+	background-color: #424242;
 	-moz-transition: background-color 0.35s ease-in-out;
 	-webkit-transition: background-color 0.35s ease-in-out;
 	-o-transition: background-color 0.35s ease-in-out;
 	-ms-transition: background-color 0.35s ease-in-out;
 	transition: background-color 0.35s ease-in-out;
-	
 }
 
 .noteListWrapper{
-	width: 700px;
-	margin: 90px auto;
+	width: 60%;
+	display:inline-table;
 }
 
 .myNotes{
-	float: right;
-	width: 700px;
-	margin-top: 90px;
+	list-style-type: none;
 }
 
 .followedNotes{
-	float: left;
-	width: 700px;
-	margin-top: 90px;
+	list-style-type: none;
 }
 
 .noteList{
 	list-style-type: none;
+	padding: 1%;
 }
 
 .splitDivRight{
-	float:left;
-	width:50%;
+	width:48%;
+	display: inline-table;
 }
 
 .splitDivLeft{
-	float: left;
-	width: 50%;
+	width: 48%;
+	display: inline-table;
+}
+
+.myNoteList{
+list-style-type: none;
+	width: 98%;
+	padding: 1%;
+}
+
+.savedNoteList{
+list-style-type: none;
+	width: 98%;
+	padding: 1%;
 }
 
 .splitDivRight h2{
 	text-align: center;
+	color: #ffffff;
+	margin-top: 10px;
 }
 
 .splitDivLeft h2{
 	text-align: center;
+	color: #ffffff;
+	margin-top: 10px;
 }
 
 .oneNote{
-	border: 1px solid #1992f5;
+	border: 1px solid white;
 	padding: 10px;
 	overflow: auto;
-	background: #8ecafa;
+	background: #424242;
+	margin-bottom: 5px;
+	border-radius: 10px;
 }
 
 
 #searchWrap{
-  position: absolute;
-  width: 300px;
-  height: 30px;
-  top: 10px;
-  right: 20px;
+display:inline-table;
+  width: 30%;
+  height: 10%;
 }
 
 #search{
-  width: 200px;
-  height: 30px;
+  width: 60%;
+  height: 100%;
   background: #2b303b;
   border: none;
   font-size: 10pt;
   color: #63717f;
-  padding-left: 10px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
 }
 
 .oneNote h3{
+	margin-left: 10px;
 	display: inline-block;
+	cursor: pointer;
 }
 
 .oneNote span{
 	float: right;
+}
+
+.oneNote h4{
+	display: inline-block;
+	cursor: pointer;
+	border: 1px solid black;
+	padding: 2px;
+	
+	color: #000000;
 }
 
 .oneNote img{
@@ -267,13 +301,12 @@ a {
 }
 
 .oneNote .auth{
-	color: #4A4A4A;
+	color: #000000;
 	display: inline;
 }
 
 .oneNote:hover{
-	background: #eee;
-	cursor: pointer;
+	background: #ffffff;
 }
 
 
@@ -284,28 +317,39 @@ a {
 }
 
 .active{
-	background: #8ecafa;
+	background: #424242;
 	color: #000000;
 	font-style: bold;
+	border: 1px solid white;
 }
 
-#noteContainer{
-	margin-top: 70px;
-}
 
 input, button{
 	margin: 10px;
 }
 
 
-#about{
-	margin: 90px auto;
-	width: 60%;
-	height: 700px;
-	padding: 20px;
-	background: #8ecafa;
+#container{
+	margin: 0 auto;
+	margin-top: 90px;
+	width: 75%;
+	min-width: 1024px;
+	height: 100%;
+	background: #1a1a1a;
 	border-radius: 10px;
+	border: 1px solid white;
 	color: #000000;
+}
+
+#about_wrapper{
+	width:98%;
+	height:98%;
+	padding:1%;
+	color: #ffffff;
+}
+
+.about_img{
+	max-width: 100%;
 }
 
 #bottomRow{
@@ -313,18 +357,27 @@ input, button{
 }
 
 #saveOptions{
-	position:absolute;
-	background: #1992f5;
+	background: #424242;
 	border-radius: 3px;
-	top: 160px;
-	right:30px;
-	height: 200px;
-	width: 300px;
+	height: 100%;
+	width: 100%;
 	text-align: center;
 	display: none;
 }
 
+#saveOptions input{
+	width: 90%;
+}
+
+#saveOptions textarea{
+	width: 90%;
+}
+
 #checkLogin{
 	margin: 150px auto;
+}
+
+.unFollowed{
+	background: #ef743a;
 }
 

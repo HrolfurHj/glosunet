@@ -19,22 +19,25 @@
 			<nav id="nav">
 				<ul class="navbar">
 					<li id="homeName"></li>
-					<li class="active"><a href="/about"><h3>Um Glósunet</h3></a></li>
 					<li><a href="/notes"><h3>Ný glósa</h3></a></li>
 					<li><a href="/search"><h3>Finna glósur</h3></a></li>
+					<li class="active"><a href="/about"><h3>Um Glósunet</h3></a></li>
 				</ul>
 			</nav>
 		</div>
-		<div id="about">
+		<div id="container">
+		<div id="about_wrapper">
 			<h3>Skrifaðu glósur</h3>
 			<p>Notaðu <b>"Ný glósa"</b> valmöguleikan til að skrifa þínar eigin glósur og vista á netinu. Glósunet notast við JQUERY plug-in JQTE sem er skrifforrit innbyggt í síðuna. JQTE býður upp á fjölda valmöguleika
 					til að gera glósurnar þínar nákvæmar og vandaðar. Eftir að hafa vistað glósuna þína geturðu alltaf nálgast hana á forsíðunni þinni undir <b>"Mínar glósur"</b></p>
-			<img src="../css/glosuEx.png">
+			<img class="about_img" src="../css/glosuEx.png">
 			<h3>Finndu glósur</h3>
 			<p>Undir <b>"Finna glósur"</b> í valmyndinni efst getur þú leitað að þeim glósum sem þig vantar. Efst til hægri á síðunni er einnig að finna leitarglugga þar sem hægt er að leita að glósum eftir flokkum, höfundum eða titlum.</p>
-			<h3>Geymdur mikilvægar glósur</h3>
-			<p>Glósunet býður upp á þann valmöguleika að geyma þær glósur sem þú telur nýtast þér og munu þær birtast þér á forsíðunni þegar þú skráir þig inn eftir það. Hægt er að fjarlægja glósur af sem þú vilt ekki geyma lengur. Þínar
-				eigin glósur er alltaf hægt að finna á forsíðunni þinni.</p>
+			<h3>Geymdu mikilvægar glósur</h3>
+			<p>Glósunet býður upp á þann valmöguleika að geyma þær glósur sem þú telur nýtast þér og munu þær birtast þér á forsíðunni þegar þú skráir þig inn eftir það. Það gerirðu einfaldlega með því að haka í kassann sem er að finna við hliðina á nafni hverrar glósu
+				á leitar síðunni. Þínar eigin glósur er alltaf hægt að finna á forsíðunni þinni.</p>
+			<img class="about_img" src="../css/saveEx.png">
+		</div>
 		</div>
 		<script id="some-template" type="text/x-handlebars-template">
 			<a href="/" id="username" data-toggle="dropdown"><h3>{{ name }}</h3></a>

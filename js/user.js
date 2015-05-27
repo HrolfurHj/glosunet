@@ -1,5 +1,7 @@
 $(document).ready(function () {
 	
+	
+	// Handler fyrir notanda
 	$.get("/username", function (data) {
 		$.post("/loadNotes",{id: data[0].id}, function (dataTwo) {
 			displayUser(data[0]);

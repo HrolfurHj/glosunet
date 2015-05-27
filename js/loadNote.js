@@ -1,4 +1,6 @@
 $(document).ready(function () {
+	
+	// Hlaða glósu
 	console.log('id: ' + id)
     $.post("/loadNote", id, function (data) {
 		console.log('Data: ' + data);

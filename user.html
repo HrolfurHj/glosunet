@@ -15,27 +15,38 @@
 			<div id="logo">
 				<h1><a href="/">Glósunet</a></h1>
 			</div>
+			<nav id="nav">
+				<ul class="navbar">
+					<li id="homeName"></li>
+					<li><a href="/notes"><h3>Ný glósa</h3></a></li>
+					<li><a href="/search"><h3>Finna glósur</h3></a></li>
+					<li><a href="/about"><h3>Um Glósunet</h3></a></li>
+				</ul>
+			</nav>
 		</div>
-		<div id="user">
-			<script class="userTemplate" type="text/x-handlebars-template">
-				<h3>{{name}}</h3>
-			</script>
-		</div>
-		<div class="noteListWrapper">
+		<div id="container">
+			<div id="searchWrap"><input type="search" id="search" placeholder="Leita..."></input><button id="pressSearch">Leita</button></div>
+			<div class="noteListWrapper">
 				<ul class="noteList">
 					<script class="noteTemplate" type="text/x-handlebars-template">
-						<a href="/note/{{_id}}">
 						<li class="oneNote">
 							<img src="../css/noteLogo.png">
-							<h3 class="noteTitle">{{title}}</h3>
+							<button class="followed" id="{{_id}}">Vista</button>
+							<a href="/note/{{_id}}">
+								<h3 class="noteTitle">{{title}}</h3>
+							</a>
 							<span>{{date}}</span>
 							<p class="desc">{{desc}}</p>
 							<p class="auth"><a href="/user/{{authorID}}">{{author}}</a></p><span>Flokkar: {{tags}}</span>
 						</li>
-						</a>
 					</script>
 				</ul>
 			</div>
-		
+		</div>
+		<script id="some-template" type="text/x-handlebars-template">
+			<a href="/" id="username" data-toggle="dropdown"><h3>{{ name }}</h3></a>
+		</script>
+		<script src="../js/handles.js"></script>
+		<script src="../js/loadNotes.js"></script>
 	</body>
 </html>
